@@ -1,0 +1,61 @@
+{
+  "name": "@kud/mcp-trakt",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "MCP server for Trakt — TV show and movie tracking with full sync support.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "mcp-trakt": "./dist/index.js"
+  },
+  "scripts": {
+    "setup": "node setup.js",
+    "build": "tsc -p tsconfig.json && chmod +x dist/index.js",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "inspect:dev": "npx @modelcontextprotocol/inspector tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "mcp",
+    "trakt",
+    "model-context-protocol",
+    "movies",
+    "tv",
+    "shows"
+  ],
+  "author": "kud",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kud/mcp-trakt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kud/mcp-trakt/issues"
+  },
+  "homepage": "https://github.com/kud/mcp-trakt#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.0.0"
+  }
+}
