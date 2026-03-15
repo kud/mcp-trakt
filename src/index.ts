@@ -3,8 +3,22 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { readFileSync } from "fs"
 import { homedir } from "os"
-import { join } from "path"
+import { dirname, join } from "path"
+import { fileURLToPath } from "url"
 import { z } from "zod"
+
+if (process.argv[2] === "setup") {
+  const { spawn } = await import("child_process")
+  const setupScript = join(
+    dirname(fileURLToPath(import.meta.url)),
+    "..",
+    "setup.js",
+  )
+  spawn(process.execPath, [setupScript], { stdio: "inherit" }).on(
+    "exit",
+    (code) => process.exit(code ?? 0),
+  )
+}
 
 const loadConfigFile = () => {
   try {

@@ -44,12 +44,10 @@
 
 Go to [trakt.tv/oauth/applications/new](https://trakt.tv/oauth/applications/new) and create a new app. You only need to fill in the name — leave the redirect URI as `urn:ietf:wg:oauth:2.0:oob`. Copy your **Client ID** and **Client Secret**.
 
-### 2. Build and run setup
+### 2. Run setup
 
 ```bash
-npm install
-npm run build
-npm run setup
+npx @kud/mcp-trakt setup
 ```
 
 This launches the device OAuth flow: paste your Client ID and Secret when prompted, visit the URL shown, enter the code, and your credentials are saved to `~/.config/trakt.json`. You never touch them again.
@@ -62,8 +60,8 @@ No credentials needed in the config — the server reads them from `~/.config/tr
 {
   "mcpServers": {
     "Trakt": {
-      "command": "node",
-      "args": ["/path/to/mcp-trakt/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "@kud/mcp-trakt@latest"]
     }
   }
 }
@@ -73,13 +71,13 @@ No credentials needed in the config — the server reads them from `~/.config/tr
 
 ## Installation
 
-Run `npm run setup` first — this saves your credentials to `~/.config/trakt.json` so no tokens are needed in any config file.
+Run `npx @kud/mcp-trakt setup` first — this saves your credentials to `~/.config/trakt.json` so no tokens are needed in any config file.
 
 <details>
 <summary><strong>Claude Code CLI</strong></summary>
 
 ```bash
-claude mcp add trakt node /path/to/mcp-trakt/dist/index.js
+claude mcp add trakt npx -- -y @kud/mcp-trakt@latest
 ```
 
 </details>
@@ -93,8 +91,8 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
 {
   "mcpServers": {
     "Trakt": {
-      "command": "node",
-      "args": ["/path/to/mcp-trakt/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "@kud/mcp-trakt@latest"]
     }
   }
 }
@@ -113,8 +111,8 @@ Edit `%APPDATA%\Claude\claude_desktop_config.json`:
 {
   "mcpServers": {
     "Trakt": {
-      "command": "node",
-      "args": ["C:\\path\\to\\mcp-trakt\\dist\\index.js"]
+      "command": "npx",
+      "args": ["-y", "@kud/mcp-trakt@latest"]
     }
   }
 }
@@ -131,8 +129,8 @@ Add to `.cursor/mcp.json` in your project root:
 {
   "mcpServers": {
     "Trakt": {
-      "command": "node",
-      "args": ["/path/to/mcp-trakt/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "@kud/mcp-trakt@latest"]
     }
   }
 }
@@ -149,8 +147,8 @@ Edit `~/.codeium/windsurf/mcp_config.json`:
 {
   "mcpServers": {
     "Trakt": {
-      "command": "node",
-      "args": ["/path/to/mcp-trakt/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "@kud/mcp-trakt@latest"]
     }
   }
 }
@@ -168,8 +166,8 @@ Add to `.vscode/mcp.json`:
   "servers": {
     "Trakt": {
       "type": "stdio",
-      "command": "node",
-      "args": ["/path/to/mcp-trakt/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "@kud/mcp-trakt@latest"]
     }
   }
 }
