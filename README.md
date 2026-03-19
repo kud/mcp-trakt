@@ -187,25 +187,29 @@ Add to `.vscode/mcp.json`:
 
 ### Movies
 
-| Tool                  | Description                                 |
-| --------------------- | ------------------------------------------- |
-| `get_movie`           | Get detailed information about a movie      |
-| `get_trending_movies` | Movies currently being watched across Trakt |
-| `get_popular_movies`  | Most popular movies on Trakt                |
-| `get_movie_ratings`   | Community rating distribution for a movie   |
-| `get_movie_related`   | Movies related to a given movie             |
-| `get_movie_people`    | Cast and crew for a movie                   |
+| Tool                     | Description                                         |
+| ------------------------ | --------------------------------------------------- |
+| `get_movie`              | Get detailed information about a movie              |
+| `get_trending_movies`    | Movies currently being watched across Trakt         |
+| `get_popular_movies`     | Most popular movies on Trakt                        |
+| `get_anticipated_movies` | Most anticipated movies based on watchlist activity |
+| `get_boxoffice_movies`   | Top 10 weekend box office movies                    |
+| `get_movie_ratings`      | Community rating distribution for a movie           |
+| `get_movie_related`      | Movies related to a given movie                     |
+| `get_movie_people`       | Cast and crew for a movie                           |
 
 ### Shows
 
-| Tool                 | Description                                       |
-| -------------------- | ------------------------------------------------- |
-| `get_show`           | Get detailed information about a TV show          |
-| `get_trending_shows` | Shows currently being watched across Trakt        |
-| `get_popular_shows`  | Most popular TV shows on Trakt                    |
-| `get_show_ratings`   | Community rating distribution for a show          |
-| `get_show_seasons`   | All seasons, optionally with full episode details |
-| `get_show_people`    | Cast and crew for a show                          |
+| Tool                    | Description                                        |
+| ----------------------- | -------------------------------------------------- |
+| `get_show`              | Get detailed information about a TV show           |
+| `get_trending_shows`    | Shows currently being watched across Trakt         |
+| `get_popular_shows`     | Most popular TV shows on Trakt                     |
+| `get_anticipated_shows` | Most anticipated shows based on watchlist activity |
+| `get_show_ratings`      | Community rating distribution for a show           |
+| `get_show_seasons`      | All seasons, optionally with full episode details  |
+| `get_show_people`       | Cast and crew for a show                           |
+| `get_show_related`      | TV shows related to a given show                   |
 
 ### Episodes
 
@@ -223,11 +227,12 @@ Add to `.vscode/mcp.json`:
 
 ### Calendar
 
-| Tool                    | Description                                  |
-| ----------------------- | -------------------------------------------- |
-| `get_my_show_calendar`  | My upcoming episodes (personalised)          |
-| `get_my_movie_calendar` | My upcoming movies (personalised)            |
-| `get_all_show_calendar` | All shows premiering and airing across Trakt |
+| Tool                     | Description                                  |
+| ------------------------ | -------------------------------------------- |
+| `get_my_show_calendar`   | My upcoming episodes (personalised)          |
+| `get_my_movie_calendar`  | My upcoming movies (personalised)            |
+| `get_all_show_calendar`  | All shows premiering and airing across Trakt |
+| `get_all_movie_calendar` | All movies releasing across Trakt            |
 
 ### History
 
@@ -236,6 +241,35 @@ Add to `.vscode/mcp.json`:
 | `get_history`         | Watch history for the authenticated user |
 | `add_to_history`      | Mark movies or episodes as watched       |
 | `remove_from_history` | Remove entries from watch history        |
+
+### Collection
+
+| Tool                     | Description                         |
+| ------------------------ | ----------------------------------- |
+| `get_collection_movies`  | All movies in the user's collection |
+| `get_collection_shows`   | All shows in the user's collection  |
+| `add_to_collection`      | Add movies, shows, or episodes      |
+| `remove_from_collection` | Remove items from the collection    |
+
+### Watched
+
+| Tool                 | Description                                    |
+| -------------------- | ---------------------------------------------- |
+| `get_watched_movies` | All watched movies with play counts            |
+| `get_watched_shows`  | All watched shows with play counts per episode |
+
+### Playback
+
+| Tool              | Description                              |
+| ----------------- | ---------------------------------------- |
+| `get_playback`    | Paused playback progress to resume later |
+| `delete_playback` | Delete a paused playback entry           |
+
+### Sync
+
+| Tool                       | Description                                        |
+| -------------------------- | -------------------------------------------------- |
+| `get_sync_last_activities` | Timestamps for when each resource was last updated |
 
 ### Ratings
 
@@ -260,6 +294,14 @@ Add to `.vscode/mcp.json`:
 | `checkin`        | Check in to a movie or episode you're watching now |
 | `delete_checkin` | Cancel the current active checkin                  |
 
+### Scrobble
+
+| Tool             | Description                                          |
+| ---------------- | ---------------------------------------------------- |
+| `scrobble_start` | Start scrobbling when playback begins                |
+| `scrobble_pause` | Pause scrobbling to save progress                    |
+| `scrobble_stop`  | Stop scrobbling when playback ends to record a watch |
+
 ### Recommendations
 
 | Tool                        | Description                          |
@@ -275,7 +317,7 @@ Add to `.vscode/mcp.json`:
 | `get_user_stats`    | Watch statistics for a user             |
 | `get_user_watching` | What a user is currently watching       |
 
-**Total: 36 Tools**
+**Total: 53 Tools**
 
 ---
 
