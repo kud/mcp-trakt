@@ -32,8 +32,8 @@ const loadConfigFile = () => {
 
 const fileConfig = loadConfigFile()
 
-const CLIENT_ID = process.env.TRAKT_CLIENT_ID ?? fileConfig.clientId
-const ACCESS_TOKEN = process.env.TRAKT_ACCESS_TOKEN ?? fileConfig.accessToken
+const CLIENT_ID = process.env.TRAKT_CLIENT_ID || fileConfig.clientId
+const ACCESS_TOKEN = process.env.TRAKT_ACCESS_TOKEN || fileConfig.accessToken
 
 if (!CLIENT_ID) {
   console.error(
