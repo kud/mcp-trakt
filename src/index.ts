@@ -7,16 +7,16 @@ import { fileURLToPath } from "url"
 import { z } from "zod"
 
 if (process.argv[2] === "setup") {
-  const { spawn } = await import("child_process")
+  const { spawnSync } = await import("child_process")
   const setupScript = join(
     dirname(fileURLToPath(import.meta.url)),
     "..",
     "setup.js",
   )
-  spawn(process.execPath, [setupScript], { stdio: "inherit" }).on(
-    "exit",
-    (code) => process.exit(code ?? 0),
-  )
+  const result = spawnSync(process.execPath, [setupScript], {
+    stdio: "inherit",
+  })
+  process.exit(result.status ?? 0)
 }
 
 const KEYCHAIN_SERVICE = "mcp-trakt"
