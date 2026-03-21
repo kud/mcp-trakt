@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
-import { readFileSync } from "fs"
-import { homedir } from "os"
+import { execFileSync } from "child_process"
 import { dirname, join } from "path"
 import { fileURLToPath } from "url"
 import { z } from "zod"
@@ -20,31 +19,38 @@ if (process.argv[2] === "setup") {
   )
 }
 
-const loadConfigFile = () => {
+const KEYCHAIN_SERVICE = "mcp-trakt"
+
+const keychainRead = (account: string): string | null => {
   try {
-    return JSON.parse(
-      readFileSync(join(homedir(), ".config", "trakt.json"), "utf8"),
+    return (
+      execFileSync(
+        "security",
+        ["find-generic-password", "-s", KEYCHAIN_SERVICE, "-a", account, "-w"],
+        { stdio: ["pipe", "pipe", "pipe"] },
+      )
+        .toString()
+        .trim() || null
     )
   } catch {
-    return {}
+    return null
   }
 }
 
-const fileConfig = loadConfigFile()
-
-const CLIENT_ID = process.env.TRAKT_CLIENT_ID || fileConfig.clientId
-const ACCESS_TOKEN = process.env.TRAKT_ACCESS_TOKEN || fileConfig.accessToken
+const CLIENT_ID = process.env.TRAKT_CLIENT_ID || keychainRead("client-id")
+const ACCESS_TOKEN =
+  process.env.TRAKT_ACCESS_TOKEN || keychainRead("access-token")
 
 if (!CLIENT_ID) {
   console.error(
-    "TRAKT_CLIENT_ID env var or clientId in ~/.config/trakt.json is required",
+    "Missing client ID — set TRAKT_CLIENT_ID or run: npx @kud/mcp-trakt setup",
   )
   process.exit(1)
 }
 
 if (!ACCESS_TOKEN) {
   console.error(
-    "TRAKT_ACCESS_TOKEN env var or accessToken in ~/.config/trakt.json is required",
+    "Missing access token — set TRAKT_ACCESS_TOKEN or run: npx @kud/mcp-trakt setup",
   )
   process.exit(1)
 }

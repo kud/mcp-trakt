@@ -50,11 +50,11 @@ Go to [trakt.tv/oauth/applications/new](https://trakt.tv/oauth/applications/new)
 npx @kud/mcp-trakt setup
 ```
 
-This launches the device OAuth flow: paste your Client ID and Secret when prompted, visit the URL shown, enter the code, and your credentials are saved to `~/.config/trakt.json`. You never touch them again.
+This launches the device OAuth flow: paste your Client ID and Secret when prompted, visit the URL shown, enter the code, and your credentials are saved securely to macOS Keychain. You never touch them again.
 
 ### 3. Add to your MCP client
 
-No credentials needed in the config — the server reads them from `~/.config/trakt.json` automatically.
+No credentials needed in the config — the server reads them from macOS Keychain automatically.
 
 ```json
 {
@@ -71,7 +71,7 @@ No credentials needed in the config — the server reads them from `~/.config/tr
 
 ## Installation
 
-Run `npx @kud/mcp-trakt setup` first — this saves your credentials to `~/.config/trakt.json` so no tokens are needed in any config file.
+Run `npx @kud/mcp-trakt setup` first — this saves your credentials to macOS Keychain so no tokens are needed in any config file.
 
 <details>
 <summary><strong>Claude Code CLI</strong></summary>
@@ -393,7 +393,7 @@ Trakt uses OAuth 2.0. The `npm run setup` script handles the full device flow �
 1. Run `npm run setup`
 2. Enter your **Client ID** and **Client Secret** from [trakt.tv/oauth/applications](https://trakt.tv/oauth/applications)
 3. Visit the URL shown (e.g. `https://trakt.tv/activate`), enter the displayed code
-4. Tokens are saved to `~/.config/trakt.json` — the server reads them automatically on every start
+4. Tokens are saved to macOS Keychain — the server reads them automatically on every start
 
 To refresh an expired token, just run `npm run setup` again.
 
@@ -431,8 +431,7 @@ curl -s https://api.trakt.tv/users/me \
 
 ## Security Best Practices
 
-- Never commit `~/.config/trakt.json` or any file containing tokens to source control
-- `~/.config/trakt.json` is user-scoped and never read by MCP client configs
+- Credentials are stored in macOS Keychain — never in plain files or config
 - Rotate your access token if it is accidentally exposed — run `npm run setup` again
 - Trakt access tokens expire after 90 days — re-run `npm run setup` to refresh
 - Treat your access token like a password: full account access with history/checkin write rights
