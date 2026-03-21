@@ -1,27 +1,40 @@
 #!/usr/bin/env node
 import { createInterface } from "readline"
-import { writeFileSync, mkdirSync } from "fs"
-import { homedir } from "os"
-import { join } from "path"
+import { execFileSync } from "child_process"
 
-const CONFIG_PATH = join(homedir(), ".config", "trakt.json")
+const KEYCHAIN_SERVICE = "mcp-trakt"
 const API_BASE = "https://api.trakt.tv"
 
 const rl = createInterface({ input: process.stdin, output: process.stdout })
 const ask = (q) => new Promise((resolve) => rl.question(q, resolve))
 
-const loadExisting = () => {
+const keychainRead = (account) => {
   try {
-    return JSON.parse(readFileSync(CONFIG_PATH, "utf8"))
+    return (
+      execFileSync(
+        "security",
+        ["find-generic-password", "-s", KEYCHAIN_SERVICE, "-a", account, "-w"],
+        { stdio: ["pipe", "pipe", "pipe"] },
+      )
+        .toString()
+        .trim() || null
+    )
   } catch {
-    return {}
+    return null
   }
 }
 
-const saveConfig = (config) => {
-  mkdirSync(join(homedir(), ".config"), { recursive: true })
-  writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2))
-}
+const keychainWrite = (account, value) =>
+  execFileSync("security", [
+    "add-generic-password",
+    "-U",
+    "-s",
+    KEYCHAIN_SERVICE,
+    "-a",
+    account,
+    "-w",
+    value,
+  ])
 
 const poll = async (deviceCode, clientId, clientSecret, interval) => {
   process.stdout.write("\nWaiting for authorization")
@@ -50,7 +63,7 @@ const poll = async (deviceCode, clientId, clientSecret, interval) => {
   }
 }
 
-const existing = loadExisting()
+const existingClientId = keychainRead("client-id")
 
 console.log("Trakt MCP Setup")
 console.log("───────────────")
@@ -61,9 +74,9 @@ console.log(
 const clientId =
   (
     await ask(
-      `Client ID${existing.clientId ? ` [${existing.clientId.slice(0, 8)}…]` : ""}: `,
+      `Client ID${existingClientId ? ` [${existingClientId.slice(0, 8)}…]` : ""}: `,
     )
-  ).trim() || existing.clientId
+  ).trim() || existingClientId
 const clientSecret = (await ask("Client Secret: ")).trim()
 
 if (!clientId || !clientSecret) {
@@ -92,12 +105,10 @@ rl.close()
 
 const token = await poll(device_code, clientId, clientSecret, interval)
 
-saveConfig({
-  clientId,
-  clientSecret,
-  accessToken: token.access_token,
-  refreshToken: token.refresh_token,
-})
+keychainWrite("client-id", clientId)
+keychainWrite("client-secret", clientSecret)
+keychainWrite("access-token", token.access_token)
+keychainWrite("refresh-token", token.refresh_token)
 
-console.log(`\nSaved to ${CONFIG_PATH}`)
+console.log(`\nSaved to macOS Keychain (${KEYCHAIN_SERVICE}).`)
 console.log("Setup complete.")
