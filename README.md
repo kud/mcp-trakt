@@ -47,7 +47,7 @@ Go to [trakt.tv/oauth/applications/new](https://trakt.tv/oauth/applications/new)
 ### 2. Run setup
 
 ```bash
-npx @kud/mcp-trakt setup
+npx @kud/mcp-trakt@latest setup
 ```
 
 This launches the device OAuth flow: paste your Client ID and Secret when prompted, visit the URL shown, enter the code, and your credentials are saved securely to macOS Keychain. You never touch them again.
@@ -71,7 +71,7 @@ No credentials needed in the config — the server reads them from macOS Keychai
 
 ## Installation
 
-Run `npx @kud/mcp-trakt setup` first — this saves your credentials to macOS Keychain so no tokens are needed in any config file.
+Run `npx @kud/mcp-trakt@latest setup` first — this saves your credentials to macOS Keychain so no tokens are needed in any config file.
 
 <details>
 <summary><strong>Claude Code CLI</strong></summary>
