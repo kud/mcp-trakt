@@ -1,0 +1,12 @@
+{
+  "name": "mcp-trakt",
+  "description": "Track what you're watching — search movies and shows, check in, browse your history, manage your watchlist, and get recommendations.",
+  "version": "1.0.0",
+  "author": {
+    "name": "kud",
+    "url": "https://github.com/kud"
+  },
+  "homepage": "https://github.com/kud/mcp-trakt",
+  "repository": "https://github.com/kud/mcp-trakt",
+  "license": "MIT"
+}
