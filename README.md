@@ -419,12 +419,12 @@ curl -s https://api.trakt.tv/users/me \
 **401 / auth errors**
 
 - Access tokens expire after 3 months — regenerate via the OAuth device flow
-- Make sure `TRAKT_CLIENT_ID` matches the app your access token was issued for
+- Make sure `MCP_TRAKT_CLIENT_ID` matches the app your access token was issued for
 - Check logs: Claude Desktop → Help → Show Logs
 
 **No data returned for personal endpoints (history, watchlist, etc.)**
 
-- These require a valid `TRAKT_ACCESS_TOKEN` — public/read-only `client_id` alone is not enough
+- These require a valid `MCP_TRAKT_ACCESS_TOKEN` — public/read-only `client_id` alone is not enough
 - Make sure the token was granted the correct scopes during the OAuth flow
 
 ---

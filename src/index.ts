@@ -37,20 +37,20 @@ const keychainRead = (account: string): string | null => {
   }
 }
 
-const CLIENT_ID = process.env.TRAKT_CLIENT_ID || keychainRead("client-id")
+const CLIENT_ID = process.env.MCP_TRAKT_CLIENT_ID || keychainRead("client-id")
 const ACCESS_TOKEN =
-  process.env.TRAKT_ACCESS_TOKEN || keychainRead("access-token")
+  process.env.MCP_TRAKT_ACCESS_TOKEN || keychainRead("access-token")
 
 if (!CLIENT_ID) {
   console.error(
-    "Missing client ID — set TRAKT_CLIENT_ID or run: npx @kud/mcp-trakt setup",
+    "Missing client ID — set MCP_TRAKT_CLIENT_ID or run: npx @kud/mcp-trakt setup",
   )
   process.exit(1)
 }
 
 if (!ACCESS_TOKEN) {
   console.error(
-    "Missing access token — set TRAKT_ACCESS_TOKEN or run: npx @kud/mcp-trakt setup",
+    "Missing access token — set MCP_TRAKT_ACCESS_TOKEN or run: npx @kud/mcp-trakt setup",
   )
   process.exit(1)
 }
