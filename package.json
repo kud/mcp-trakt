@@ -1,6 +1,6 @@
 {
   "name": "@kud/mcp-trakt",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "type": "module",
   "description": "MCP server for Trakt — TV show and movie tracking with full sync support.",
   "main": "dist/index.js",
