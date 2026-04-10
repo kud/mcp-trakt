@@ -1,6 +1,8 @@
 {
-  "mcp-trakt": {
-    "command": "npx",
-    "args": ["tsx", "src/index.ts"]
+  "mcpServers": {
+    "mcp-trakt": {
+      "command": "npx",
+      "args": ["tsx", "src/index.ts"]
+    }
   }
 }
