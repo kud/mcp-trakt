@@ -56,6 +56,7 @@ if (!ACCESS_TOKEN) {
 }
 
 export const API_BASE = "https://api.trakt.tv"
+export const USER_AGENT = "mcp-trakt"
 
 export const apiFetch = async <T>(
   path: string,
@@ -68,6 +69,7 @@ export const apiFetch = async <T>(
         "trakt-api-version": "2",
         "trakt-api-key": CLIENT_ID!,
         "Content-Type": "application/json",
+        "User-Agent": USER_AGENT,
         Authorization: `Bearer ${ACCESS_TOKEN}`,
         ...options.headers,
       },
@@ -95,6 +97,7 @@ const apiDelete = async (path: string): Promise<boolean> => {
         "trakt-api-key": CLIENT_ID!,
         Authorization: `Bearer ${ACCESS_TOKEN}`,
         "Content-Type": "application/json",
+        "User-Agent": USER_AGENT,
       },
     })
     return response.ok

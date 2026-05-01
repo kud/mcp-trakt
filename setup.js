@@ -4,6 +4,7 @@ import { execFileSync } from "child_process"
 
 const KEYCHAIN_SERVICE = "mcp-trakt"
 const API_BASE = "https://api.trakt.tv"
+const USER_AGENT = "mcp-trakt"
 
 const rl = createInterface({ input: process.stdin, output: process.stdout })
 const ask = (q) => new Promise((resolve) => rl.question(q, resolve))
@@ -43,7 +44,10 @@ const poll = async (deviceCode, clientId, clientSecret, interval) => {
     process.stdout.write(".")
     const res = await fetch(`${API_BASE}/oauth/device/token`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": USER_AGENT,
+      },
       body: JSON.stringify({
         code: deviceCode,
         client_id: clientId,
@@ -86,7 +90,10 @@ if (!clientId || !clientSecret) {
 
 const deviceRes = await fetch(`${API_BASE}/oauth/device/code`, {
   method: "POST",
-  headers: { "Content-Type": "application/json" },
+  headers: {
+    "Content-Type": "application/json",
+    "User-Agent": USER_AGENT,
+  },
   body: JSON.stringify({ client_id: clientId }),
 })
 
