@@ -1,0 +1,85 @@
+---
+title: Introduction
+description: A Trakt MCP server with 53 tools for tracking TV shows and movies, sync, ratings, watchlists, and checkins — straight from Claude.
+---
+
+**mcp-trakt** lets Claude (and any MCP client) talk to your [Trakt](https://trakt.tv)
+account. Track what you watch, search Trakt's database, manage your watchlist and
+ratings, check in to what's playing right now, and pull personalised
+recommendations — all through natural conversation.
+
+It exposes **53 tools** spanning search, movies, shows, episodes, people,
+calendar, history, collection, watched, playback, sync, ratings, watchlist,
+checkin, scrobble, recommendations, and user stats.
+
+## Features
+
+- 🔍 **Search** movies, shows, episodes, and people across Trakt's database
+- 🎬 **Movies** — details, trending, popular, related, ratings, and cast
+- 📺 **Shows & Episodes** — full show info, seasons, episode details, cast
+- 👤 **People** — actor/director profiles and filmographies
+- 📅 **Calendar** — your personalised upcoming episodes and movies
+- 🕐 **History** — view, add, and remove watch history entries
+- ⭐ **Ratings** — get, add, and remove ratings for movies, shows, and episodes
+- 📋 **Watchlist** — full CRUD on your movie/show watchlist
+- ✅ **Checkin** — check into what you're watching right now
+- 🤖 **Recommendations** — personalised movie and show suggestions
+
+## Quick start
+
+### 1. Create a Trakt API app
+
+Go to [trakt.tv/oauth/applications/new](https://trakt.tv/oauth/applications/new)
+and create a new app. You only need to fill in the name — leave the redirect URI
+as `urn:ietf:wg:oauth:2.0:oob`. Copy your **Client ID** and **Client Secret**.
+
+### 2. Run setup
+
+```bash
+npx @kud/mcp-trakt@latest setup
+```
+
+This launches the device OAuth flow: paste your Client ID and Secret when
+prompted, visit the URL shown, enter the code, and your credentials are saved
+securely to the macOS Keychain. You never touch them again.
+
+### 3. Add to your MCP client
+
+No credentials needed in the config — the server reads them from the macOS
+Keychain automatically.
+
+```json
+{
+  "mcpServers": {
+    "Trakt": {
+      "command": "npx",
+      "args": ["-y", "@kud/mcp-trakt@latest"]
+    }
+  }
+}
+```
+
+## Example conversations
+
+> "What movies are trending on Trakt right now?"
+
+> "Search for Breaking Bad and give me its full details."
+
+> "What episodes of Severance do I have coming up this week?"
+
+> "Mark that I just watched Dune: Part Two — give it a 9."
+
+> "Add The Penguin to my watchlist."
+
+> "Check me in to S02E01 of The Bear."
+
+> "What have I watched this month?"
+
+> "Give me 10 personalised movie recommendations."
+
+> "Who plays the lead in Succession and what else have they been in?"
+
+> "What are my all-time watch stats?"
+
+Head to [Installation](/projects/mcp-trakt/docs/installation) to add it to your
+client, or browse the full [Tools](/projects/mcp-trakt/docs/tools) reference.

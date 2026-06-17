@@ -1,0 +1,37 @@
+---
+title: Authentication
+description: Set up Trakt OAuth via the device flow — tokens are saved to the macOS Keychain, never to config files.
+---
+
+Trakt uses OAuth 2.0. The `npm run setup` script handles the full device flow —
+you never manage tokens manually.
+
+## How it works
+
+1. Run `npm run setup`
+2. Enter your **Client ID** and **Client Secret** from
+   [trakt.tv/oauth/applications](https://trakt.tv/oauth/applications)
+3. Visit the URL shown (e.g. `https://trakt.tv/activate`), enter the displayed
+   code
+4. Tokens are saved to the macOS Keychain — the server reads them automatically
+   on every start
+
+To refresh an expired token, just run `npm run setup` again.
+
+## Test your credentials
+
+```bash
+curl -s https://api.trakt.tv/users/me \
+  -H "trakt-api-version: 2" \
+  -H "trakt-api-key: YOUR_CLIENT_ID" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" | jq .username
+```
+
+## Security best practices
+
+- Credentials are stored in the macOS Keychain — never in plain files or config
+- Rotate your access token if it is accidentally exposed — run `npm run setup`
+  again
+- Trakt access tokens expire after 90 days — re-run `npm run setup` to refresh
+- Treat your access token like a password: full account access with
+  history/checkin write rights

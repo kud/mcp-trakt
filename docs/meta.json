@@ -1,0 +1,10 @@
+{
+  "title": "mcp-trakt",
+  "pages": [
+    "index",
+    "installation",
+    "tools",
+    "authentication",
+    "troubleshooting"
+  ]
+}
