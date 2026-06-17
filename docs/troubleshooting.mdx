@@ -1,22 +1,22 @@
 ---
-title: Troubleshooting
+title: 🩺 Troubleshooting
 description: Common issues with mcp-trakt — server not showing, auth errors, and empty personal data.
 ---
 
-## Server not showing in Claude Desktop
+## 👻 Server not showing in Claude Desktop
 
 - Check JSON syntax in `claude_desktop_config.json`
 - Verify the path to `dist/index.js` is absolute and the file exists
 - Run `npm run build` if `dist/` is missing
 
-## 401 / auth errors
+## 🔐 401 / auth errors
 
 - Access tokens expire after 3 months — regenerate via the OAuth device flow
 - Make sure `MCP_TRAKT_CLIENT_ID` matches the app your access token was issued
   for
 - Check logs: Claude Desktop → Help → Show Logs
 
-## No data returned for personal endpoints (history, watchlist, etc.)
+## 📭 No data returned for personal endpoints (history, watchlist, etc.)
 
 - These require a valid `MCP_TRAKT_ACCESS_TOKEN` — a public/read-only
   `client_id` alone is not enough
