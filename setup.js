@@ -43,7 +43,12 @@ const poll = async (deviceCode, clientId, clientSecret, interval) => {
     process.stdout.write(".")
     const res = await fetch(`${API_BASE}/oauth/device/token`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "User-Agent": "mcp-trakt",
+        "Content-Type": "application/json",
+        "trakt-api-version": "2",
+        "trakt-api-key": clientId,
+      },
       body: JSON.stringify({
         code: deviceCode,
         client_id: clientId,
@@ -67,8 +72,9 @@ const existingClientId = keychainRead("client-id")
 
 console.log("Trakt MCP Setup")
 console.log("───────────────")
+console.log("Your apps: https://trakt.tv/oauth/applications")
 console.log(
-  "Create an app at https://trakt.tv/oauth/applications/new if you haven't yet.\n",
+  "Create one: https://trakt.tv/oauth/applications/new (if you haven't yet)\n",
 )
 
 const clientId =
@@ -86,7 +92,12 @@ if (!clientId || !clientSecret) {
 
 const deviceRes = await fetch(`${API_BASE}/oauth/device/code`, {
   method: "POST",
-  headers: { "Content-Type": "application/json" },
+  headers: {
+    "User-Agent": "mcp-trakt",
+    "Content-Type": "application/json",
+    "trakt-api-version": "2",
+    "trakt-api-key": clientId,
+  },
   body: JSON.stringify({ client_id: clientId }),
 })
 
