@@ -65,6 +65,7 @@ export const apiFetch = async <T>(
     const response = await fetch(`${API_BASE}${path}`, {
       ...options,
       headers: {
+        "User-Agent": "mcp-trakt",
         "trakt-api-version": "2",
         "trakt-api-key": CLIENT_ID!,
         "Content-Type": "application/json",
@@ -91,6 +92,7 @@ const apiDelete = async (path: string): Promise<boolean> => {
     const response = await fetch(`${API_BASE}${path}`, {
       method: "DELETE",
       headers: {
+        "User-Agent": "mcp-trakt",
         "trakt-api-version": "2",
         "trakt-api-key": CLIENT_ID!,
         Authorization: `Bearer ${ACCESS_TOKEN}`,

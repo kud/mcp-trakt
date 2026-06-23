@@ -22,11 +22,22 @@
 
 ## Install
 
-Run the one-time OAuth setup to store your Trakt credentials in the macOS Keychain:
+### 1. Create a Trakt application
+
+Create an app at [trakt.tv/oauth/applications/new](https://trakt.tv/oauth/applications/new) — or manage existing ones at [trakt.tv/oauth/applications](https://trakt.tv/oauth/applications):
+
+- **Redirect URI** — set it to `urn:ietf:wg:oauth:2.0:oob`. This server authenticates with Trakt's device flow, which never redirects, but Trakt requires the field; `oob` is the standard out-of-band placeholder.
+- Copy the **Client ID** and **Client Secret** — you'll paste them in the next step.
+
+### 2. Authenticate
+
+Run the one-time OAuth setup. It exchanges your credentials for an access token and stores everything in the macOS Keychain (service `mcp-trakt`):
 
 ```sh
 npx @kud/mcp-trakt@latest setup
 ```
+
+> **Credentials resolution:** the server reads from the macOS Keychain by default. On platforms without Keychain (Linux, CI, Docker), set `MCP_TRAKT_CLIENT_ID` and `MCP_TRAKT_ACCESS_TOKEN` instead — env vars take precedence over the Keychain.
 
 Then register the server with your MCP client:
 
