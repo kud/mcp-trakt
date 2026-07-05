@@ -41,14 +41,19 @@ const CLIENT_ID = process.env.MCP_TRAKT_CLIENT_ID || keychainRead("client-id")
 const ACCESS_TOKEN =
   process.env.MCP_TRAKT_ACCESS_TOKEN || keychainRead("access-token")
 
-if (!CLIENT_ID) {
+// Tests import this module to exercise the tool handlers against a mocked
+// fetch; they must not trip the credential guard, which would exit the whole
+// test runner. The real CLI still fails fast when creds are genuinely missing.
+const runningUnderTest = process.env.VITEST === "true"
+
+if (!CLIENT_ID && !runningUnderTest) {
   console.error(
     "Missing client ID — set MCP_TRAKT_CLIENT_ID or run: npx @kud/mcp-trakt setup",
   )
   process.exit(1)
 }
 
-if (!ACCESS_TOKEN) {
+if (!ACCESS_TOKEN && !runningUnderTest) {
   console.error(
     "Missing access token — set MCP_TRAKT_ACCESS_TOKEN or run: npx @kud/mcp-trakt setup",
   )
@@ -1726,7 +1731,9 @@ const main = async () => {
   console.error("mcp-trakt running")
 }
 
-main().catch((error) => {
-  console.error("Fatal:", error)
-  process.exit(1)
-})
+if (!runningUnderTest) {
+  main().catch((error) => {
+    console.error("Fatal:", error)
+    process.exit(1)
+  })
+}
