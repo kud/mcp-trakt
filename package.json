@@ -46,7 +46,7 @@
   "bugs": {
     "url": "https://github.com/kud/mcp-trakt/issues"
   },
-  "homepage": "https://github.com/kud/mcp-trakt#readme",
+  "homepage": "https://kud.io/projects/mcp-trakt",
   "engines": {
     "node": ">=20.0.0"
   },
